@@ -11,6 +11,7 @@ type Activity struct {
 	Name       string
 	DistrictID string
 	Time       string
+	APCost     int
 	Rewards    []Reward
 	HasBusStop bool
 }
