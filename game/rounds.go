@@ -20,7 +20,11 @@ func newRound(players []*Player, time string) *Round {
 	return r
 }
 
-func (r *Round) nextTurn() *Turn {
+func (r *Round) NextTurn() *Turn {
 	r.index++
 	return r.Turns[r.index]
+}
+
+func (r *Round) Complete() bool {
+	return r.index == len(r.Turns)-1
 }
