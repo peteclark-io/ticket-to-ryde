@@ -48,7 +48,7 @@ func (g *Game) UpdateScore(player string, rewards []*Reward) {
 	for _, score := range g.Scores {
 		if score.PlayerID == player {
 			score.addRewards(rewards)
-			score.total()
+			score.TotalScore()
 			return
 		}
 	}

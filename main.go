@@ -23,11 +23,9 @@ func run() {
 		panic(err)
 	}
 
-	i := scenes.IntroScene{}
-	i.RunScene(context.TODO(), win)
+	scenes.IntroScene()(context.TODO(), win)
 
-	g := scenes.GameScene{}
-	g.RunScene(win)
+	scenes.GameScene()(context.TODO(), win)
 }
 
 func loadPicture(path string) (pixel.Picture, error) {

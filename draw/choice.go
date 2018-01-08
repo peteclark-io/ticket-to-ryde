@@ -12,31 +12,39 @@ import (
 	"golang.org/x/image/colornames"
 )
 
-var Board *game.Board
-
-const height = 70.0
-const width = 180.0
-const margin = 10.0
-
-func init() {
-	Board = game.BasicBoard
-}
-
 type ChoiceSelection struct {
 	Rect   pixel.Rect
 	Choice *game.Choice
 }
 
-func DrawChoice(win *pixelgl.Window, c *game.Choice, index int) *ChoiceSelection {
+type ChoiceConfig struct {
+	Height float64
+	Width  float64
+	Margin float64
+}
+
+func NewChoiceConfig(height, width, margin float64) *ChoiceConfig {
+	return &ChoiceConfig{Height: height, Width: width, Margin: margin}
+}
+
+func NewDefaultChoiceConfig() *ChoiceConfig {
+	return &ChoiceConfig{Height: 70.0, Width: 180.0, Margin: 10.0}
+}
+
+func DrawChoice(conf *ChoiceConfig, win *pixelgl.Window, board *game.Board, c *game.Choice, index int) *ChoiceSelection {
+	if conf == nil {
+		conf = NewDefaultChoiceConfig()
+	}
+
 	imd := imdraw.New(nil)
 	imd.Color = colornames.White
 	imd.EndShape = imdraw.SharpEndShape
 
-	yMin := (700 - height) // - (height * float64(index)) + margin
-	yMax := 700.0          //- (height * float64(index))
+	yMin := (700 - conf.Height) // - (height * float64(index)) + margin
+	yMax := 700.0               //- (height * float64(index))
 
-	xMin := 50 + (width*float64(index) + margin)
-	xMax := 50 + width + (width * float64(index))
+	xMin := 50 + (conf.Width*float64(index) + conf.Margin)
+	xMax := 50 + conf.Width + (conf.Width * float64(index))
 
 	r := pixel.R(xMin, yMin, xMax, yMax)
 
@@ -47,9 +55,9 @@ func DrawChoice(win *pixelgl.Window, c *game.Choice, index int) *ChoiceSelection
 
 	switch c.Type {
 	case game.MovementChoiceType:
-		fmt.Fprintf(basicTxt, "Go to %s", Board.Activities[c.ActivityID].Name)
+		fmt.Fprintf(basicTxt, "Go to %s", board.Activities[c.ActivityID].Name)
 	case game.ActivityChoiceType:
-		fmt.Fprintf(basicTxt, "Go inside %s", Board.Activities[c.ActivityID].Name)
+		fmt.Fprintf(basicTxt, "Go inside %s", board.Activities[c.ActivityID].Name)
 	case game.PickupCardChoiceType:
 		fmt.Fprintf(basicTxt, "Pick up a card?")
 	case game.PlayCardChoiceType:

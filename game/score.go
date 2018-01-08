@@ -8,7 +8,7 @@ type Score struct {
 	Experiences    int    `json:"experiences"`
 }
 
-func (s *Score) total() int {
+func (s *Score) TotalScore() int {
 	val := s.FoodRewards * 5
 	val += s.AlcoholRewards * 7
 	val += s.Experiences * 10
