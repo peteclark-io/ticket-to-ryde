@@ -22,3 +22,7 @@ func Center(itemWidth int) pixel.Vec {
 	y := (WindowHeight / 2.0)
 	return pixel.V(x, y)
 }
+
+func TopRightCorner(itemWidth float64, margin float64) pixel.Vec {
+	return pixel.V(WindowWidth-itemWidth-margin, WindowHeight-20)
+}
