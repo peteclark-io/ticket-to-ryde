@@ -18,14 +18,15 @@ func run() {
 		Bounds: pixel.R(0, 0, dimensions.WindowWidth, dimensions.WindowHeight),
 		VSync:  true,
 	}
+
 	win, err := pixelgl.NewWindow(cfg)
 	if err != nil {
 		panic(err)
 	}
 
 	scenes.IntroScene()(context.TODO(), win)
-
 	scenes.GameScene()(context.TODO(), win)
+
 }
 
 func loadPicture(path string) (pixel.Picture, error) {

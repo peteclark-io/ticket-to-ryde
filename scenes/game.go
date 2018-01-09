@@ -12,23 +12,18 @@ import (
 func GameScene() Scene {
 	return func(ctx context.Context, win *pixelgl.Window) {
 		p := game.NewPlayer("1", "Pedro")
-		d := game.NewPlayer("2", "Ducky")
-		g := game.NewGame(game.BasicBoard, p, d)
+		//d := game.NewPlayer("2", "Ducky")
+		g := game.NewGame(game.BasicBoard, p)
 
 		round := g.Start()
-		turn := round.NextTurn()
-
 		for !win.Closed() {
 			win.Clear(colornames.Black)
 
 			if round.Complete() {
-				round = g.Start()
+				break
 			}
 
-			if turn.Complete() {
-				turn = round.NextTurn()
-			}
-
+			RoundScene(g, round)(ctx, win)
 			win.Update()
 		}
 	}
