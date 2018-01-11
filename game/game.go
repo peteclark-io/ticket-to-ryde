@@ -75,3 +75,10 @@ func (g *Game) GetPosition(player string) *PlayerPosition {
 func (g *Game) Start() *Round {
 	return newRound(g.Players, dayTime)
 }
+
+func (g *Game) NextRound(r *Round) *Round {
+	if r.Time == dayTime {
+		return newRound(g.Players, nightTime)
+	}
+	return newRound(g.Players, dayTime)
+}

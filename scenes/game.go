@@ -5,6 +5,7 @@ import (
 
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/peteclark-io/ticket-to-ryde/game"
+	"github.com/peteclark-io/ticket-to-ryde/transitions"
 	"golang.org/x/image/colornames"
 )
 
@@ -20,7 +21,13 @@ func GameScene() Scene {
 			win.Clear(colornames.Black)
 
 			if round.Complete() {
-				break
+				round = g.NextRound(round)
+
+				if round.Time == "day" {
+					transitions.Sunrise(ctx, win)
+				} else {
+					transitions.NightTime(ctx, win)
+				}
 			}
 
 			RoundScene(g, round)(ctx, win)

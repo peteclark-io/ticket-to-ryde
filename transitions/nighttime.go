@@ -14,12 +14,12 @@ import (
 	"golang.org/x/image/colornames"
 )
 
-func Sunrise(ctx context.Context, win *pixelgl.Window) {
-	win.Clear(colornames.Skyblue)
+func NightTime(ctx context.Context, win *pixelgl.Window) {
+	win.Clear(colornames.Black)
 
-	titleTxt := text.New(dimensions.Center(7*30).Add(pixel.V(0, 100)), vars.DefaultAtlas)
+	titleTxt := text.New(dimensions.Center(11*30).Add(pixel.V(0, 100)), vars.DefaultAtlas)
 
-	fmt.Fprintf(titleTxt, strings.ToUpper("Dayime!"))
+	fmt.Fprintf(titleTxt, strings.ToUpper("Night Time!"))
 	titleTxt.Draw(win, pixel.IM.Scaled(titleTxt.Orig, 4))
 
 	dt := time.Now()
