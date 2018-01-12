@@ -13,8 +13,8 @@ import (
 func GameScene() Scene {
 	return func(ctx context.Context, win *pixelgl.Window) {
 		p := game.NewPlayer("1", "Pedro")
-		//d := game.NewPlayer("2", "Ducky")
-		g := game.NewGame(game.BasicBoard, p)
+		d := game.NewPlayer("2", "Fernando Luiz Roza")
+		g := game.NewGame(game.BasicBoard, p, d)
 
 		round := g.Start()
 		for !win.Closed() {

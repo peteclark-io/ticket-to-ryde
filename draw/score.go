@@ -24,7 +24,7 @@ func DrawScores(win *pixelgl.Window, g *game.Game) {
 		}
 	}
 
-	scoresTxt := text.New(dimensions.TopRightCorner(float64(maxLength)*4, 5.0), vars.DefaultAtlas)
+	scoresTxt := text.New(dimensions.TopRightCorner(float64(maxLength)*5, 10.0), vars.DefaultAtlas)
 	fmt.Fprint(scoresTxt, txt)
 
 	scoresTxt.Draw(win, pixel.IM)
