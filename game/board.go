@@ -3,14 +3,33 @@ package game
 import "errors"
 
 type Board struct {
-	Activities  map[string]*Activity
-	Connections map[string][]Connection
+	Activities              map[string]*Activity
+	Coordinates             map[string]*Coordinate
+	Connections             []Connection
+	ConnectionsByActivityID map[string][]Connection
 }
 
 type Connection struct {
-	Distance  int
-	ActivityA string
-	ActivityB string
+	Distance    int
+	Origin      string
+	Destination string
+}
+
+type Coordinate struct {
+	ActivityID string  `json:"activity_id"`
+	X          float64 `json:"x"`
+	Y          float64 `json:"y"`
+}
+
+func (b *Board) init() {
+	b.ConnectionsByActivityID = make(map[string][]Connection)
+	for _, conn := range b.Connections {
+		orig := b.ConnectionsByActivityID[conn.Origin]
+		b.ConnectionsByActivityID[conn.Origin] = append(orig, conn)
+
+		dest := b.ConnectionsByActivityID[conn.Destination]
+		b.ConnectionsByActivityID[conn.Destination] = append(dest, conn.invert())
+	}
 }
 
 func (b *Board) GetActivity(id string) *Activity {
@@ -45,11 +64,11 @@ func (b *Board) GetChoicesForPosition(p *PlayerPosition) []*Choice {
 
 	if p.Moved != 0 {
 		choices = append(choices, newChoice(MovementChoiceType, p.Moved, p.LastActivity)) // go back to last activity
-		connections := b.Connections[p.LastActivity]
+		connections := b.ConnectionsByActivityID[p.LastActivity]
 		for _, conn := range connections {
-			if conn.ActivityB == p.MovedTowardsActivity {
+			if conn.Destination == p.MovedTowardsActivity {
 				neededMovement := conn.Distance - p.Moved
-				choices = append(choices, newChoice(MovementChoiceType, neededMovement, conn.ActivityB)) // move to next activity
+				choices = append(choices, newChoice(MovementChoiceType, neededMovement, conn.Destination)) // move to next activity
 			}
 		}
 		return choices
@@ -65,10 +84,14 @@ func (b *Board) GetChoicesForPosition(p *PlayerPosition) []*Choice {
 		choices = append(choices, newChoice(RideBusChoiceType, 3, activity.ID))
 	}
 
-	connections := b.Connections[activity.ID]
+	connections := b.ConnectionsByActivityID[activity.ID]
 	for _, conn := range connections {
-		choices = append(choices, newChoice(MovementChoiceType, conn.Distance, conn.ActivityB))
+		choices = append(choices, newChoice(MovementChoiceType, conn.Distance, conn.Destination))
 	}
 
 	return choices
+}
+
+func (c Connection) invert() Connection {
+	return Connection{Origin: c.Destination, Destination: c.Origin, Distance: c.Distance}
 }

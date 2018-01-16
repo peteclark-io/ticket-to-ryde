@@ -7,6 +7,7 @@ import (
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
+	"github.com/peteclark-io/ticket-to-ryde/dimensions"
 	"github.com/peteclark-io/ticket-to-ryde/draw"
 	"github.com/peteclark-io/ticket-to-ryde/game"
 	"github.com/peteclark-io/ticket-to-ryde/vars"
@@ -27,7 +28,7 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 			activity := g.Board.GetActivity(position.LastActivity)
 			player := g.GetPlayer(turn.PlayerID)
 
-			basicTxt := text.New(pixel.V(50, 750), vars.DefaultAtlas)
+			basicTxt := text.New(pixel.V(50, dimensions.WindowHeight-20), vars.DefaultAtlas)
 
 			fmt.Fprintf(basicTxt, "%s you're in %s - you have %vAP remaining", player.Name, activity.Name, turn.RemainingAP)
 			basicTxt.Draw(win, pixel.IM)
@@ -42,6 +43,8 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 			}
 
 			draw.DrawScores(win, g)
+
+			draw.DrawMap(win, g.Board)
 
 			if win.JustPressed(pixelgl.MouseButtonLeft) {
 				for _, p := range choicePositions {

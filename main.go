@@ -26,7 +26,6 @@ func run() {
 
 	scenes.IntroScene()(context.TODO(), win)
 	scenes.GameScene()(context.TODO(), win)
-
 }
 
 func loadPicture(path string) (pixel.Picture, error) {

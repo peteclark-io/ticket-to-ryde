@@ -9,30 +9,55 @@ var BasicBoard = &Board{
 			Name:       "Emma's House",
 			APCost:     3,
 			DistrictID: "S/W",
-			Rewards:    []*Reward{foodReward, alcoholReward},
+			Time:       anytimeActivity,
+			Rewards:    []*Reward{foodReward, alcoholReward, friendshipReward},
 		},
 		"2": &Activity{
 			ID:         "2",
-			APCost:     4,
-			Name:       "Manly Beach",
-			DistrictID: "N/E",
-			Rewards:    []*Reward{foodReward, alcoholReward, experienceReward},
+			Name:       "St. Peter's Station",
+			APCost:     2,
+			DistrictID: "S/W",
+			Time:       dayTimeActivity,
+			Rewards:    []*Reward{},
+		},
+		"3": &Activity{
+			ID:         "3",
+			Name:       "Union Hotel",
+			APCost:     2,
+			DistrictID: "S/W",
+			Time:       nightTimeActivity,
+			Rewards:    []*Reward{foodReward, alcoholReward},
+		},
+		"4": &Activity{
+			ID:         "4",
+			Name:       "Stinking Bishops",
+			APCost:     2,
+			DistrictID: "S/W",
+			Time:       anytimeActivity,
+			Rewards:    []*Reward{foodReward, alcoholReward},
 		},
 	},
-	Connections: map[string][]Connection{
-		"1": {
-			{
-				ActivityA: "1",
-				ActivityB: "2",
-				Distance:  3,
-			},
+	Coordinates: map[string]*Coordinate{
+		"1": &Coordinate{ActivityID: "1", X: 0, Y: 0},
+		"2": &Coordinate{ActivityID: "2", X: -15, Y: -35},
+		"3": &Coordinate{ActivityID: "3", X: -30, Y: -40},
+		"4": &Coordinate{ActivityID: "4", X: -40, Y: -50},
+	},
+	Connections: []Connection{
+		{
+			Origin:      "1",
+			Destination: "2",
+			Distance:    2,
 		},
-		"2": {
-			{
-				ActivityA: "2",
-				ActivityB: "1",
-				Distance:  3,
-			},
+		{
+			Origin:      "1",
+			Destination: "3",
+			Distance:    2,
+		},
+		{
+			Origin:      "2",
+			Destination: "4",
+			Distance:    3,
 		},
 	},
 }

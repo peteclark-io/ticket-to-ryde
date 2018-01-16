@@ -3,8 +3,8 @@ package dimensions
 import "github.com/faiface/pixel"
 
 const (
-	WindowWidth  = 1280.0
-	WindowHeight = 768.0
+	WindowWidth  = 1024.0
+	WindowHeight = 600.0
 )
 
 func CenterWidth(itemWidth int, y int) pixel.Vec {

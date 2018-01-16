@@ -25,7 +25,7 @@ func Sunrise(ctx context.Context, win *pixelgl.Window) {
 	dt := time.Now()
 
 	for !win.Closed() {
-		if time.Now().After(dt.Add(time.Second * 3)) {
+		if time.Now().After(dt.Add(time.Millisecond * 2200)) {
 			break
 		}
 

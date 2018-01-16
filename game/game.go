@@ -8,6 +8,8 @@ type Game struct {
 }
 
 func NewGame(board *Board, players ...*Player) *Game {
+	board.init()
+
 	g := &Game{Players: players, Board: board}
 	for _, player := range players {
 		g.Positions = append(g.Positions, &PlayerPosition{

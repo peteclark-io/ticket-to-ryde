@@ -7,6 +7,7 @@ import (
 	"github.com/faiface/pixel/imdraw"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
+	"github.com/peteclark-io/ticket-to-ryde/dimensions"
 	"github.com/peteclark-io/ticket-to-ryde/game"
 	"github.com/peteclark-io/ticket-to-ryde/vars"
 	"golang.org/x/image/colornames"
@@ -18,17 +19,18 @@ type ChoiceSelection struct {
 }
 
 type ChoiceConfig struct {
-	Height float64
-	Width  float64
-	Margin float64
+	Height  float64
+	Width   float64
+	XMargin float64
+	YMargin float64
 }
 
-func NewChoiceConfig(height, width, margin float64) *ChoiceConfig {
-	return &ChoiceConfig{Height: height, Width: width, Margin: margin}
+func NewChoiceConfig(height, width, xMargin, yMargin float64) *ChoiceConfig {
+	return &ChoiceConfig{Height: height, Width: width, XMargin: xMargin, YMargin: yMargin}
 }
 
 func NewDefaultChoiceConfig() *ChoiceConfig {
-	return &ChoiceConfig{Height: 70.0, Width: 180.0, Margin: 10.0}
+	return &ChoiceConfig{Height: 70.0, Width: 180.0, XMargin: 10.0, YMargin: 60.0}
 }
 
 func DrawChoice(conf *ChoiceConfig, win *pixelgl.Window, board *game.Board, c *game.Choice, index int) *ChoiceSelection {
@@ -40,10 +42,14 @@ func DrawChoice(conf *ChoiceConfig, win *pixelgl.Window, board *game.Board, c *g
 	imd.Color = colornames.White
 	imd.EndShape = imdraw.SharpEndShape
 
-	yMin := (700 - conf.Height) // - (height * float64(index)) + margin
-	yMax := 700.0               //- (height * float64(index))
+	yMin := (dimensions.WindowHeight - conf.Height - conf.YMargin) // - (height * float64(index)) + margin
+	yMax := dimensions.WindowHeight - conf.YMargin                 //- (height * float64(index))
 
-	xMin := 50 + (conf.Width*float64(index) + conf.Margin)
+	xMin := 50 + (conf.Width*float64(index) + conf.XMargin)
+	if index == 0 {
+		xMin = 50 + (conf.Width * float64(index))
+	}
+
 	xMax := 50 + conf.Width + (conf.Width * float64(index))
 
 	r := pixel.R(xMin, yMin, xMax, yMax)
