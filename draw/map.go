@@ -33,7 +33,7 @@ func drawConnections(tgt pixel.Target, imd *imdraw.IMDraw, distance int, a, b *g
 	// 	return arg1 / 2
 	// })
 
-	basicTxt := text.New(aV.Unit().Normal().Scaled(2), vars.DefaultAtlas)
+	basicTxt := text.New(aV.Normal(), vars.DefaultAtlas)
 	fmt.Fprint(basicTxt, distance)
 	basicTxt.Draw(tgt, pixel.IM)
 
