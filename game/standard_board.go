@@ -39,15 +39,15 @@ var BasicBoard = &Board{
 	},
 	Coordinates: map[string]*Coordinate{
 		"1": &Coordinate{ActivityID: "1", X: 0, Y: 0},
-		"2": &Coordinate{ActivityID: "2", X: -15, Y: -35},
-		"3": &Coordinate{ActivityID: "3", X: -30, Y: -40},
-		"4": &Coordinate{ActivityID: "4", X: -40, Y: -50},
+		"2": &Coordinate{ActivityID: "2", X: -60, Y: 40},
+		"3": &Coordinate{ActivityID: "3", X: -90, Y: -70},
+		"4": &Coordinate{ActivityID: "4", X: -380, Y: -250},
 	},
 	Connections: []Connection{
 		{
 			Origin:      "1",
 			Destination: "2",
-			Distance:    2,
+			Distance:    1,
 		},
 		{
 			Origin:      "1",

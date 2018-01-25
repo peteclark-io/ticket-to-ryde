@@ -3,12 +3,14 @@ package scenes
 import (
 	"context"
 	"fmt"
+	"math"
 
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
 	"github.com/faiface/pixel/text"
 	"github.com/peteclark-io/ticket-to-ryde/dimensions"
 	"github.com/peteclark-io/ticket-to-ryde/draw"
+	"github.com/peteclark-io/ticket-to-ryde/fps"
 	"github.com/peteclark-io/ticket-to-ryde/game"
 	"github.com/peteclark-io/ticket-to-ryde/vars"
 	log "github.com/sirupsen/logrus"
@@ -17,8 +19,15 @@ import (
 
 func TurnScene(g *game.Game, turn *game.Turn) Scene {
 	return func(ctx context.Context, win *pixelgl.Window) {
+		screen := pixel.R(-512, -300, 512, 300)
+		// d := dimensions.D{Rect: screen}
+
+		camPos := pixel.ZV
+		canvas := pixelgl.NewCanvas(screen)
+
 		for !win.Closed() {
 			win.Clear(colornames.Black)
+			canvas.Clear(pixel.Alpha(0))
 
 			if turn.Complete() {
 				break
@@ -42,9 +51,8 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 				choicePositions = append(choicePositions, r)
 			}
 
-			draw.DrawScores(win, g)
-
-			draw.DrawMap(win, g.Board)
+			draw.DrawScores(dimensions.DefaultScreen, win, g)
+			draw.DrawMap(canvas, g.Board)
 
 			if win.JustPressed(pixelgl.MouseButtonLeft) {
 				for _, p := range choicePositions {
@@ -55,7 +63,33 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 				}
 			}
 
+			if win.Pressed(pixelgl.KeyDown) {
+				camPos.Y--
+			}
+
+			if win.Pressed(pixelgl.KeyUp) {
+				camPos.Y++
+			}
+
+			if win.Pressed(pixelgl.KeyLeft) {
+				camPos.X--
+			}
+
+			if win.Pressed(pixelgl.KeyRight) {
+				camPos.X++
+			}
+
+			canvas.SetMatrix(pixel.IM.Moved(camPos.Scaled(-2)))
+
+			canvas.Draw(win, pixel.IM.Scaled(pixel.ZV,
+				math.Min(
+					win.Bounds().W()/canvas.Bounds().W(),
+					win.Bounds().H()/canvas.Bounds().H(),
+				),
+			).Scaled(pixel.ZV, 2).Moved(win.Bounds().Center()))
+
 			win.Update()
+			fps.MeasureFPS(win)
 		}
 	}
 }

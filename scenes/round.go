@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/faiface/pixel/pixelgl"
+	"github.com/peteclark-io/ticket-to-ryde/fps"
 	"github.com/peteclark-io/ticket-to-ryde/game"
 	"golang.org/x/image/colornames"
 )
@@ -22,6 +23,7 @@ func RoundScene(g *game.Game, round *game.Round) Scene {
 			TurnScene(g, turn)(ctx, win)
 
 			win.Update()
+			fps.MeasureFPS(win)
 		}
 	}
 }
