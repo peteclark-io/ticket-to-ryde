@@ -39,7 +39,7 @@ var BasicBoard = &Board{
 	},
 	Coordinates: map[string]*Coordinate{
 		"1": &Coordinate{ActivityID: "1", X: 0, Y: 0},
-		"2": &Coordinate{ActivityID: "2", X: -60, Y: 40},
+		"2": &Coordinate{ActivityID: "2", X: -240, Y: 40},
 		"3": &Coordinate{ActivityID: "3", X: -90, Y: -70},
 		"4": &Coordinate{ActivityID: "4", X: -380, Y: -250},
 	},
