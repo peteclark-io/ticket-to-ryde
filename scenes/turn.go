@@ -33,6 +33,13 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 				break
 			}
 
+			matrix := pixel.IM.Scaled(pixel.ZV,
+				math.Min(
+					win.Bounds().W()/canvas.Bounds().W(),
+					win.Bounds().H()/canvas.Bounds().H(),
+				),
+			).Scaled(pixel.ZV, 2).Moved(win.Bounds().Center())
+
 			position := g.GetPosition(turn.PlayerID)
 			activity := g.Board.GetActivity(position.LastActivity)
 			player := g.GetPlayer(turn.PlayerID)
@@ -52,13 +59,19 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 			}
 
 			draw.DrawScores(dimensions.DefaultScreen, win, g)
-			draw.DrawMap(canvas, g.Board)
+			coords := draw.DrawMap(canvas, g.Board)
 
 			if win.JustPressed(pixelgl.MouseButtonLeft) {
 				for _, p := range choicePositions {
 					if p.Rect.Contains(win.MousePosition()) {
 						log.Infof("Selected %s", p.Choice.Type)
 						g.Select(position, turn, p.Choice)
+					}
+				}
+
+				for _, c := range coords {
+					if c.Rect.Contains(matrix.Unproject(win.MousePosition())) {
+						log.Infof("Selected %s", g.Board.GetActivity(c.Coord.ActivityID))
 					}
 				}
 			}
@@ -81,12 +94,7 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 
 			canvas.SetMatrix(pixel.IM.Moved(camPos.Scaled(-2)))
 
-			canvas.Draw(win, pixel.IM.Scaled(pixel.ZV,
-				math.Min(
-					win.Bounds().W()/canvas.Bounds().W(),
-					win.Bounds().H()/canvas.Bounds().H(),
-				),
-			).Scaled(pixel.ZV, 2).Moved(win.Bounds().Center()))
+			canvas.Draw(win, matrix)
 
 			win.Update()
 			fps.MeasureFPS(win)

@@ -11,11 +11,17 @@ import (
 	"github.com/peteclark-io/ticket-to-ryde/vars"
 )
 
-func DrawMap(tgt pixel.Target, board *game.Board) {
+type CoordSelection struct {
+	Rect  pixel.Rect
+	Coord *game.Coordinate
+}
+
+func DrawMap(tgt pixel.Target, board *game.Board) []CoordSelection {
 	imd := imdraw.New(nil)
 
+	var coords []CoordSelection
 	for _, coord := range board.Coordinates {
-		drawCoordinate(imd, coord)
+		coords = append(coords, drawCoordinate(imd, coord))
 		drawLabel(tgt, board.GetActivity(coord.ActivityID).Name, coord)
 	}
 
@@ -24,6 +30,7 @@ func DrawMap(tgt pixel.Target, board *game.Board) {
 	}
 
 	imd.Draw(tgt)
+	return coords
 }
 
 func drawConnections(tgt pixel.Target, imd *imdraw.IMDraw, distance int, a, b *game.Coordinate) {
@@ -52,14 +59,14 @@ func scaleFactor(v pixel.Vec) float64 {
 		return 18.0
 	} else if v.X < 0 && v.Y < 0 {
 		return 10.0
-	} else {
-		return 14.0
 	}
+	return 14.0
 }
 
-func drawCoordinate(imd *imdraw.IMDraw, coord *game.Coordinate) {
+func drawCoordinate(imd *imdraw.IMDraw, coord *game.Coordinate) CoordSelection {
 	imd.Push(pixel.V(coord.X, coord.Y))
 	imd.Circle(10, 2)
+	return CoordSelection{Rect: pixel.R(coord.X-6, coord.Y-6, coord.X+6, coord.Y+6), Coord: coord}
 }
 
 func drawLabel(tgt pixel.Target, label string, coord *game.Coordinate) {
