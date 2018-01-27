@@ -9,6 +9,7 @@ import (
 	"github.com/faiface/pixel/text"
 	"github.com/peteclark-io/ticket-to-ryde/game"
 	"github.com/peteclark-io/ticket-to-ryde/vars"
+	"golang.org/x/image/colornames"
 )
 
 type CoordSelection struct {
@@ -19,14 +20,14 @@ type CoordSelection struct {
 func DrawMap(tgt pixel.Target, board *game.Board) []CoordSelection {
 	imd := imdraw.New(nil)
 
-	var coords []CoordSelection
-	for _, coord := range board.Coordinates {
-		coords = append(coords, drawCoordinate(imd, coord))
-		drawLabel(tgt, board.GetActivity(coord.ActivityID).Name, coord)
-	}
-
 	for _, conn := range board.Connections {
 		drawConnections(tgt, imd, conn.Distance, board.Coordinates[conn.Origin], board.Coordinates[conn.Destination])
+	}
+
+	var coords []CoordSelection
+	for _, coord := range board.Coordinates {
+		// coords = append(coords, )
+		drawActivity(imd, coord)
 	}
 
 	imd.Draw(tgt)
@@ -44,32 +45,48 @@ func drawConnections(tgt pixel.Target, imd *imdraw.IMDraw, distance int, a, b *g
 	dir := bV.Sub(sum).Unit().Rotated(-math.Pi / 2)
 
 	basicTxt := text.New(sum.Add(dir.Scaled(scaleFactor(dir))), vars.DefaultAtlas)
+	basicTxt.Color = colornames.White
 
 	fmt.Fprint(basicTxt, fmt.Sprintf("%vAP", distance))
 	basicTxt.Draw(tgt, pixel.IM)
 
+	imd.Color = colornames.White
 	imd.Push(aV, bV)
-	imd.Line(2)
+	imd.Line(1)
 }
 
 func scaleFactor(v pixel.Vec) float64 {
+	perc := math.Abs(v.Angle() / math.Pi) // deal with the extreme angles
+	if perc > 0.95 || perc < 0.05 {
+		return 16.0
+	} else if perc > 0.85 || perc < 0.15 {
+		return 14.0
+	}
+
+	if perc > 0.48 && perc < 0.52 {
+		return 5.0
+	}
+
 	if v.X > 0 && v.Y > 0 {
 		return 6.0
 	} else if v.X < 0 && v.Y > 0 {
-		return 18.0
+		return 10.0
 	} else if v.X < 0 && v.Y < 0 {
 		return 10.0
 	}
-	return 14.0
+	return 10.0
 }
 
 func drawCoordinate(imd *imdraw.IMDraw, coord *game.Coordinate) CoordSelection {
 	imd.Push(pixel.V(coord.X, coord.Y))
-	imd.Circle(10, 2)
-	return CoordSelection{Rect: pixel.R(coord.X-6, coord.Y-6, coord.X+6, coord.Y+6), Coord: coord}
+	imd.Circle(6, 0)
+	offset := 9.5
+	return CoordSelection{Rect: pixel.R(coord.X-offset, coord.Y-offset, coord.X+offset, coord.Y+offset), Coord: coord}
 }
 
-func drawLabel(tgt pixel.Target, label string, coord *game.Coordinate) {
+func DrawCoordinateLabel(tgt pixel.Target, board *game.Board, coord *game.Coordinate) {
+	label := board.GetActivity(coord.ActivityID).Name
+
 	basicTxt := text.New(pixel.V(coord.X+14, coord.Y), vars.DefaultAtlas)
 	fmt.Fprint(basicTxt, label)
 

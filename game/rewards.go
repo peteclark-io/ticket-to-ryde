@@ -3,6 +3,7 @@ package game
 const (
 	foodRewardType       = "food"
 	alcoholRewardType    = "alcohol"
+	restRewardType       = "rest"
 	experienceRewardType = "experience"
 	friendshipRewardType = "friendship"
 )
@@ -12,6 +13,7 @@ var (
 	alcoholReward    = &Reward{Type: alcoholRewardType, Score: 7}
 	experienceReward = &Reward{Type: experienceRewardType, Score: 10}
 	friendshipReward = &Reward{Type: friendshipRewardType, Score: 10}
+	restReward       = &Reward{Type: restRewardType, Score: 5}
 )
 
 type Reward struct {

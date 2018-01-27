@@ -3,7 +3,6 @@ package scenes
 import (
 	"context"
 	"fmt"
-	"math"
 
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
@@ -12,6 +11,7 @@ import (
 	"github.com/peteclark-io/ticket-to-ryde/draw"
 	"github.com/peteclark-io/ticket-to-ryde/fps"
 	"github.com/peteclark-io/ticket-to-ryde/game"
+	"github.com/peteclark-io/ticket-to-ryde/sprites"
 	"github.com/peteclark-io/ticket-to-ryde/vars"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/image/colornames"
@@ -19,26 +19,22 @@ import (
 
 func TurnScene(g *game.Game, turn *game.Turn) Scene {
 	return func(ctx context.Context, win *pixelgl.Window) {
-		screen := pixel.R(-512, -300, 512, 300)
-		// d := dimensions.D{Rect: screen}
+		screen := pixel.R(-1024, -600, 1024, 600)
 
-		camPos := pixel.ZV
+		camPos := pixel.V(-800, -500)
 		canvas := pixelgl.NewCanvas(screen)
+		figure := sprites.PlainLegoFigure()
+		bayMap := sprites.BayMap()
 
 		for !win.Closed() {
-			win.Clear(colornames.Black)
+			win.Clear(colornames.Forestgreen)
+
 			canvas.Clear(pixel.Alpha(0))
+			bayMap.Draw(win, pixel.IM.Scaled(pixel.ZV, win.Bounds().H()/bayMap.Frame().H()).Moved(win.Bounds().Center()))
 
 			if turn.Complete() {
 				break
 			}
-
-			matrix := pixel.IM.Scaled(pixel.ZV,
-				math.Min(
-					win.Bounds().W()/canvas.Bounds().W(),
-					win.Bounds().H()/canvas.Bounds().H(),
-				),
-			).Scaled(pixel.ZV, 2).Moved(win.Bounds().Center())
 
 			position := g.GetPosition(turn.PlayerID)
 			activity := g.Board.GetActivity(position.LastActivity)
@@ -61,6 +57,9 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 			draw.DrawScores(dimensions.DefaultScreen, win, g)
 			coords := draw.DrawMap(canvas, g.Board)
 
+			cam := pixel.IM.Moved(camPos.Scaled(-1))
+			canvas.SetMatrix(cam)
+
 			if win.JustPressed(pixelgl.MouseButtonLeft) {
 				for _, p := range choicePositions {
 					if p.Rect.Contains(win.MousePosition()) {
@@ -70,31 +69,41 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 				}
 
 				for _, c := range coords {
-					if c.Rect.Contains(matrix.Unproject(win.MousePosition())) {
+					if c.Rect.Contains(win.MousePosition()) {
 						log.Infof("Selected %s", g.Board.GetActivity(c.Coord.ActivityID))
 					}
 				}
 			}
 
-			if win.Pressed(pixelgl.KeyDown) {
-				camPos.Y--
+			for _, c := range coords {
+				if c.Rect.Contains(cam.Unproject(win.MousePosition())) {
+					draw.DrawCoordinateLabel(canvas, g.Board, c.Coord)
+					break
+				}
 			}
 
+			speed := 8.0
 			if win.Pressed(pixelgl.KeyUp) {
-				camPos.Y++
+				camPos.Y = camPos.Y + speed
 			}
 
-			if win.Pressed(pixelgl.KeyLeft) {
-				camPos.X--
+			if win.Pressed(pixelgl.KeyDown) {
+				camPos.Y = camPos.Y - speed
 			}
 
 			if win.Pressed(pixelgl.KeyRight) {
-				camPos.X++
+				camPos.X = camPos.X + speed
 			}
 
-			canvas.SetMatrix(pixel.IM.Moved(camPos.Scaled(-2)))
+			if win.Pressed(pixelgl.KeyLeft) {
+				camPos.X = camPos.X - speed
+			}
 
-			canvas.Draw(win, matrix)
+			figure.Draw(canvas, pixel.IM.
+				Moved(g.Board.Coordinates[position.LastActivity].ToVector()))
+
+			canvas.Draw(win, pixel.IM.
+				Moved(canvas.Bounds().Center()))
 
 			win.Update()
 			fps.MeasureFPS(win)

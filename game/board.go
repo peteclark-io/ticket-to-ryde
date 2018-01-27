@@ -1,6 +1,10 @@
 package game
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/faiface/pixel"
+)
 
 type Board struct {
 	Activities              map[string]*Activity
@@ -94,4 +98,8 @@ func (b *Board) GetChoicesForPosition(p *PlayerPosition) []*Choice {
 
 func (c Connection) invert() Connection {
 	return Connection{Origin: c.Destination, Destination: c.Origin, Distance: c.Distance}
+}
+
+func (c *Coordinate) ToVector() pixel.Vec {
+	return pixel.V(c.X, c.Y)
 }
