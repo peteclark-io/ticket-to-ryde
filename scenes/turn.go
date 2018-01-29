@@ -3,6 +3,7 @@ package scenes
 import (
 	"context"
 	"fmt"
+	"math"
 
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/pixelgl"
@@ -25,6 +26,8 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 		canvas := pixelgl.NewCanvas(screen)
 		figure := sprites.PlainLegoFigure()
 		bayMap := sprites.BayMap()
+
+		zoom := defaultZoom()
 
 		for !win.Closed() {
 			win.Clear(colornames.Forestgreen)
@@ -57,7 +60,7 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 			draw.DrawScores(dimensions.DefaultScreen, win, g)
 			coords := draw.DrawMap(canvas, g.Board)
 
-			cam := pixel.IM.Moved(camPos.Scaled(-1))
+			cam := pixel.IM.Scaled(pixel.ZV, zoom.camZoom).Moved(camPos.Scaled(-1))
 			canvas.SetMatrix(cam)
 
 			if win.JustPressed(pixelgl.MouseButtonLeft) {
@@ -80,6 +83,12 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 					draw.DrawCoordinateLabel(canvas, g.Board, c.Coord)
 					break
 				}
+			}
+
+			if zoom.lastScroll != win.MouseScroll() {
+				zoom.camZoom *= math.Pow(zoom.zoomSpeed, win.MouseScroll().Y)
+				zoom.lastMousePosition = win.MousePosition()
+				zoom.lastScroll = win.MouseScroll()
 			}
 
 			speed := 8.0
