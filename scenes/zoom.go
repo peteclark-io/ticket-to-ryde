@@ -10,5 +10,9 @@ type zoom struct {
 }
 
 func defaultZoom() *zoom {
-	return &zoom{camZoom: 1.0, zoomSpeed: 3.0, lastScroll: pixel.ZV, lastMousePosition: pixel.ZV}
+	return &zoom{camZoom: 1.0, zoomSpeed: 0.5, lastScroll: pixel.ZV, lastMousePosition: pixel.ZV}
+}
+
+func (z *zoom) getLastMousePosition(cam pixel.Matrix) pixel.Vec {
+	return cam.Unproject(z.lastMousePosition)
 }

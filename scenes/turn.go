@@ -60,9 +60,6 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 			draw.DrawScores(dimensions.DefaultScreen, win, g)
 			coords := draw.DrawMap(canvas, g.Board)
 
-			cam := pixel.IM.Scaled(pixel.ZV, zoom.camZoom).Moved(camPos.Scaled(-1))
-			canvas.SetMatrix(cam)
-
 			if win.JustPressed(pixelgl.MouseButtonLeft) {
 				for _, p := range choicePositions {
 					if p.Rect.Contains(win.MousePosition()) {
@@ -76,19 +73,6 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 						log.Infof("Selected %s", g.Board.GetActivity(c.Coord.ActivityID))
 					}
 				}
-			}
-
-			for _, c := range coords {
-				if c.Rect.Contains(cam.Unproject(win.MousePosition())) {
-					draw.DrawCoordinateLabel(canvas, g.Board, c.Coord)
-					break
-				}
-			}
-
-			if zoom.lastScroll != win.MouseScroll() {
-				zoom.camZoom *= math.Pow(zoom.zoomSpeed, win.MouseScroll().Y)
-				zoom.lastMousePosition = win.MousePosition()
-				zoom.lastScroll = win.MouseScroll()
 			}
 
 			speed := 8.0
@@ -106,6 +90,22 @@ func TurnScene(g *game.Game, turn *game.Turn) Scene {
 
 			if win.Pressed(pixelgl.KeyLeft) {
 				camPos.X = camPos.X - speed
+			}
+
+			if zoom.lastScroll != win.MouseScroll() {
+				zoom.camZoom *= math.Pow(zoom.zoomSpeed, win.MouseScroll().Y)
+				zoom.lastMousePosition = win.MousePosition()
+				zoom.lastScroll = win.MouseScroll()
+			}
+
+			cam := pixel.IM.Scaled(zoom.getLastMousePosition(pixel.IM.Moved(camPos.Scaled(-1))), zoom.camZoom).Moved(camPos.Scaled(-1))
+			canvas.SetMatrix(cam)
+
+			for _, c := range coords {
+				if c.Rect.Contains(cam.Unproject(win.MousePosition())) {
+					draw.DrawCoordinateLabel(canvas, g.Board, c.Coord)
+					break
+				}
 			}
 
 			figure.Draw(canvas, pixel.IM.
