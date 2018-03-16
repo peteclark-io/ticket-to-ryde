@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/Roguelike Modern City.tsx-8e5521effa7a97ca5598cb795b9381bf.res"
+
+[deps]
+
+source_file="res://assets/tilesets/Roguelike Modern City.tsx"
+source_md5="52b33c79a138d8dba0f1b4c49013912f"
+
+dest_files=[ "res://.import/Roguelike Modern City.tsx-8e5521effa7a97ca5598cb795b9381bf.res" ]
+dest_md5="6ae4b4fba5f90d256daf91e8633a0102"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""

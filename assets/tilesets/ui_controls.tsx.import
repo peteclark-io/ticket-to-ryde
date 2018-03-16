@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/ui_controls.tsx-04f995236035990c67247446de7b7574.res"
+
+[deps]
+
+source_file="res://assets/tilesets/ui_controls.tsx"
+source_md5="46fa0c8edeeaceb0b831f683fdbd3d3e"
+
+dest_files=[ "res://.import/ui_controls.tsx-04f995236035990c67247446de7b7574.res" ]
+dest_md5="2860eb499284dccaab41dfb047a61557"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""

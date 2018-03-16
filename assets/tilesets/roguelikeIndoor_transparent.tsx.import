@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/roguelikeIndoor_transparent.tsx-d007e5a6b692664838e7879786501511.res"
+
+[deps]
+
+source_file="res://assets/tilesets/roguelikeIndoor_transparent.tsx"
+source_md5="ba5277bada33194d0c6863dbfab42664"
+
+dest_files=[ "res://.import/roguelikeIndoor_transparent.tsx-d007e5a6b692664838e7879786501511.res" ]
+dest_md5="e51a05200ba62c74032b75d07bbebd10"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""

@@ -1,0 +1,481 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://game.gd" type="Script" id=1]
+[ext_resource path="res://assets/tilesets/bigger-map.tmx" type="PackedScene" id=2]
+[ext_resource path="res://activities/activities.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/activity.tscn" type="PackedScene" id=4]
+[ext_resource path="res://activities/activity_marker.tscn" type="PackedScene" id=5]
+[ext_resource path="res://controls/activity_panel.tscn" type="PackedScene" id=6]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://shaders/dawn.tscn" type="PackedScene" id=8]
+[ext_resource path="res://shaders/dusk.tscn" type="PackedScene" id=9]
+[ext_resource path="res://shaders/nighttime.tscn" type="PackedScene" id=10]
+[ext_resource path="res://map-decorations/street_lamp.tscn" type="PackedScene" id=11]
+[ext_resource path="res://map-decorations/tree.tscn" type="PackedScene" id=12]
+[ext_resource path="res://map-decorations/bus_stop.tscn" type="PackedScene" id=13]
+
+[sub_resource type="Shader" id=1]
+
+code = "shader_type canvas_item;
+uniform bool grayscale = false;
+
+vec4 to_grayscale(vec4 col){
+	float avg = (col.r + col.g + col.b) / 3.0;
+	return vec4(avg, avg, avg, col.a);
+}
+
+void fragment(){
+	vec4 pixel_col = texture(TEXTURE, UV);
+	if(grayscale){
+		COLOR = to_grayscale(pixel_col);
+	} else {
+		COLOR = pixel_col;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+
+render_priority = 0
+shader = SubResource( 1 )
+shader_param/grayscale = false
+_sections_unfolded = [ "shader_param" ]
+
+[node name="map" type="YSort" index="0"]
+
+sort_enabled = true
+script = ExtResource( 1 )
+screensize = Vector2( 3200, 3200 )
+
+[node name="bigger-map" parent="." index="0" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+z_index = -1
+_sections_unfolded = [ "Z Index" ]
+
+[node name="activities" parent="bigger-map" index="9" instance=ExtResource( 3 )]
+
+[node name="emmas_house" parent="bigger-map/activities" index="0" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+activity_hours = "Always"
+activity_name = "Emma's House"
+activity_blurb = "Emma cracks open a bottle of bubbly, \"Welcome to Australia!!\" she exclaims! \"We're going to have the lovliest holiday!"
+points = 4
+activity_duration = 8
+has_food = true
+has_bed = true
+has_drink = false
+
+[node name="marker1" parent="bigger-map/activities/emmas_house" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 87.7907, 3158.25 )
+z_index = -1
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="activity_panel" parent="bigger-map/activities/emmas_house" index="1" instance=ExtResource( 6 )]
+
+material = SubResource( 2 )
+margin_left = 51.0
+margin_top = 3049.0
+margin_right = 157.0
+margin_bottom = 3131.0
+rect_scale = Vector2( 0.7, 0.7 )
+_sections_unfolded = [ "Material", "Rect", "Visibility" ]
+
+[node name="union_hotel" parent="bigger-map/activities" index="1" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+activity_hours = "Always"
+activity_name = "The Union Hotel"
+activity_blurb = "As you enter your hotel room, you drop your bags to the floor and sink onto the bed. \"I'll just close my eyes for a few minutes\" you think, as your eyelids grow heavy and you slowly drift off to sleep."
+points = 6
+activity_duration = 24
+has_food = true
+has_bed = true
+has_drink = true
+
+[node name="marker2" parent="bigger-map/activities/union_hotel" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 624.334, 2853.59 )
+z_index = -1
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="activity_panel" parent="bigger-map/activities/union_hotel" index="1" instance=ExtResource( 6 )]
+
+margin_left = 586.0
+margin_top = 2752.0
+margin_right = 697.0
+margin_bottom = 2836.0
+rect_scale = Vector2( 0.7, 0.7 )
+_sections_unfolded = [ "Material", "Rect", "Visibility" ]
+
+[node name="shakespeare_hotel" parent="bigger-map/activities" index="2" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+activity_hours = "Always"
+activity_name = "The Shakespeare"
+activity_blurb = "The porter shows you to your room. \"Here is your en suite, and most importantly, here's your mini-bar.\" he says, gesturing to a well stocked fridge. \"How convenient!\" you excitedly remark. The porter throws you a puzzled look."
+points = 4
+activity_duration = 32
+has_bed = true
+
+[node name="marker3" parent="bigger-map/activities/shakespeare_hotel" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 1255.75, 2356.55 )
+z_index = -1
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="activity_panel" parent="bigger-map/activities/shakespeare_hotel" index="1" instance=ExtResource( 6 )]
+
+margin_left = 1218.0
+margin_top = 2254.0
+margin_right = 1329.0
+margin_bottom = 2338.0
+rect_scale = Vector2( 0.7, 0.7 )
+_sections_unfolded = [ "Material", "Rect", "Visibility" ]
+
+[node name="stinking_bishops" parent="bigger-map/activities" index="3" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+activity_hours = "5pm - 11pm"
+activity_name = "Stinking Bishops"
+activity_blurb = "Emma pushes open the door and you're immediately hit by an overwhelming cheesy pong. \"That must be the Brillat Savarin, my favourite surface ripened cheese\", declares Emma."
+points = 2
+activity_duration = 6
+has_food = true
+has_bed = false
+has_drink = true
+
+[node name="marker4" parent="bigger-map/activities/stinking_bishops" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 104.321, 2628.68 )
+z_index = -1
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="activity_panel" parent="bigger-map/activities/stinking_bishops" index="1" instance=ExtResource( 6 )]
+
+margin_left = 66.0
+margin_top = 2529.0
+margin_right = 177.0
+margin_bottom = 2613.0
+rect_scale = Vector2( 0.7, 0.7 )
+_sections_unfolded = [ "Material", "Rect", "Visibility" ]
+
+[node name="petersham_bowlo" parent="bigger-map/activities" index="4" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+activity_hours = "11am - 5pm"
+activity_name = "Petersham Bowlo"
+activity_blurb = "You pick up the heavy black bowl, and steady yourself. Ed stares at you; he's trying to put you off the task at hand. \"He knows his last bowl wasn't good enough\", you think. You step up to the mat, exhale loudly, and close your eyes as you roll your bowl..."
+points = 3
+activity_duration = 4
+has_food = false
+has_bed = false
+has_drink = false
+
+[node name="marker5" parent="bigger-map/activities/petersham_bowlo" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 200.449, 2340.63 )
+z_index = -1
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="activity_panel" parent="bigger-map/activities/petersham_bowlo" index="1" instance=ExtResource( 6 )]
+
+margin_left = 162.0
+margin_top = 2239.0
+margin_right = 273.0
+margin_bottom = 2323.0
+rect_scale = Vector2( 0.7, 0.7 )
+_sections_unfolded = [ "Material", "Rect", "Visibility" ]
+
+[node name="gift_shop" parent="bigger-map/activities" index="5" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+activity_hours = "9am - 5pm"
+activity_name = "Gift Shop"
+activity_blurb = "After 10mins of browsing, you finally see it. The thing you've always wanted. It gleams in it's glass case; \"Beautiful isn't it\", the sales assistant remarks, \"and yours for only $140\". Sounds pricey to you, but f*!k it, how often do you get the chance to own a boomerang!?"
+points = 2
+activity_duration = 2
+has_food = false
+has_bed = false
+has_drink = false
+
+[node name="marker6" parent="bigger-map/activities/gift_shop" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 1216.86, 2628.79 )
+z_index = -1
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="activity_panel" parent="bigger-map/activities/gift_shop" index="1" instance=ExtResource( 6 )]
+
+margin_left = 1178.0
+margin_top = 2517.0
+margin_right = 1289.0
+margin_bottom = 2601.0
+rect_scale = Vector2( 0.7, 0.7 )
+_sections_unfolded = [ "Material", "Rect", "Visibility" ]
+
+[node name="the_bench" parent="bigger-map/activities" index="6" instance=ExtResource( 4 )]
+
+editor/display_folded = true
+activity_hours = "All Day!"
+activity_name = "Ducky Park Bench"
+activity_blurb = "You stroll into the luscious Ducky Park, and are immediately drawn to the tranquil waters of the small pond. \"Let's have a chill here, take a load off\""
+points = 4
+activity_duration = 3
+has_food = false
+has_bed = true
+has_drink = false
+
+[node name="marker7" parent="bigger-map/activities/the_bench" index="0" instance=ExtResource( 5 )]
+
+position = Vector2( 720.385, 2474.93 )
+z_index = -1
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Z Index" ]
+
+[node name="activity_panel" parent="bigger-map/activities/the_bench" index="1" instance=ExtResource( 6 )]
+
+margin_left = 680.0
+margin_top = 2380.0
+margin_right = 798.0
+margin_bottom = 2466.0
+rect_scale = Vector2( 0.7, 0.7 )
+_sections_unfolded = [ "Material", "Rect", "Visibility" ]
+
+[node name="player" parent="." index="1" instance=ExtResource( 7 )]
+
+position = Vector2( 1732, 2208 )
+
+[node name="dawn" parent="." index="2" instance=ExtResource( 8 )]
+
+[node name="dusk" parent="." index="3" instance=ExtResource( 9 )]
+
+visible = false
+
+[node name="nighttime" parent="." index="4" instance=ExtResource( 10 )]
+
+visible = false
+position = Vector2( -2, 1 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="street_lamp" parent="." index="5" instance=ExtResource( 11 )]
+
+position = Vector2( 161.672, 3162 )
+
+[node name="street_lamp2" parent="." index="6" instance=ExtResource( 11 )]
+
+position = Vector2( 161.672, 3032 )
+
+[node name="street_lamp3" parent="." index="7" instance=ExtResource( 11 )]
+
+position = Vector2( 289.82, 3032 )
+
+[node name="street_lamp11" parent="." index="8" instance=ExtResource( 11 )]
+
+position = Vector2( 421.672, 3032 )
+
+[node name="street_lamp13" parent="." index="9" instance=ExtResource( 11 )]
+
+position = Vector2( 511.672, 2952 )
+
+[node name="street_lamp14" parent="." index="10" instance=ExtResource( 11 )]
+
+position = Vector2( 511.672, 2852 )
+
+[node name="street_lamp6" parent="." index="11" instance=ExtResource( 11 )]
+
+position = Vector2( 31.6722, 2932 )
+
+[node name="street_lamp15" parent="." index="12" instance=ExtResource( 11 )]
+
+position = Vector2( 361.672, 2922 )
+
+[node name="street_lamp17" parent="." index="13" instance=ExtResource( 11 )]
+
+position = Vector2( 411.672, 2732 )
+
+[node name="street_lamp18" parent="." index="14" instance=ExtResource( 11 )]
+
+position = Vector2( 291.672, 2732 )
+
+[node name="street_lamp7" parent="." index="15" instance=ExtResource( 11 )]
+
+position = Vector2( 161.672, 2882 )
+
+[node name="street_lamp8" parent="." index="16" instance=ExtResource( 11 )]
+
+position = Vector2( 161.672, 2782 )
+
+[node name="street_lamp9" parent="." index="17" instance=ExtResource( 11 )]
+
+position = Vector2( 41.6722, 2722 )
+
+[node name="street_lamp10" parent="." index="18" instance=ExtResource( 11 )]
+
+position = Vector2( 61.6722, 2622 )
+
+[node name="street_lamp19" parent="." index="19" instance=ExtResource( 11 )]
+
+position = Vector2( 241.672, 2622 )
+
+[node name="street_lamp20" parent="." index="20" instance=ExtResource( 11 )]
+
+position = Vector2( 401.672, 2622 )
+
+[node name="street_lamp21" parent="." index="21" instance=ExtResource( 11 )]
+
+position = Vector2( 401.672, 2452 )
+
+[node name="street_lamp26" parent="." index="22" instance=ExtResource( 11 )]
+
+position = Vector2( 511.672, 2452 )
+
+[node name="street_lamp27" parent="." index="23" instance=ExtResource( 11 )]
+
+position = Vector2( 511.672, 2342 )
+
+[node name="street_lamp28" parent="." index="24" instance=ExtResource( 11 )]
+
+position = Vector2( 731.672, 2322 )
+
+[node name="street_lamp22" parent="." index="25" instance=ExtResource( 11 )]
+
+position = Vector2( 291.672, 2452 )
+
+[node name="street_lamp25" parent="." index="26" instance=ExtResource( 11 )]
+
+position = Vector2( 291.672, 2332 )
+
+[node name="street_lamp23" parent="." index="27" instance=ExtResource( 11 )]
+
+position = Vector2( 161.672, 2452 )
+
+[node name="street_lamp24" parent="." index="28" instance=ExtResource( 11 )]
+
+position = Vector2( 161.672, 2332 )
+
+[node name="street_lamp5" parent="." index="29" instance=ExtResource( 11 )]
+
+position = Vector2( 261.672, 3162 )
+
+[node name="street_lamp4" parent="." index="30" instance=ExtResource( 11 )]
+
+position = Vector2( 31.6722, 3032 )
+
+[node name="tree" parent="." index="31" instance=ExtResource( 12 )]
+
+position = Vector2( 647.491, 2510.01 )
+TreeType = "tree_dark"
+
+[node name="tree2" parent="." index="32" instance=ExtResource( 12 )]
+
+position = Vector2( 664, 2494 )
+TreeType = "thin_tree_light"
+
+[node name="tree3" parent="." index="33" instance=ExtResource( 12 )]
+
+position = Vector2( 552, 2414 )
+TreeType = "thin_tree_light"
+
+[node name="tree4" parent="." index="34" instance=ExtResource( 12 )]
+
+position = Vector2( 568, 2398 )
+TreeType = "tree_light"
+
+[node name="tree5" parent="." index="35" instance=ExtResource( 12 )]
+
+position = Vector2( 584, 2382 )
+TreeType = "thin_tree_dark"
+
+[node name="tree6" parent="." index="36" instance=ExtResource( 12 )]
+
+position = Vector2( 552, 2382 )
+TreeType = "tree_light"
+
+[node name="tree7" parent="." index="37" instance=ExtResource( 12 )]
+
+position = Vector2( 536, 2558 )
+TreeType = "thin_tree_light"
+
+[node name="tree8" parent="." index="38" instance=ExtResource( 12 )]
+
+position = Vector2( 568, 2606 )
+TreeType = "fat_tree_light"
+
+[node name="tree9" parent="." index="39" instance=ExtResource( 12 )]
+
+position = Vector2( 728, 2574 )
+TreeType = "thin_tree_light"
+
+[node name="tree10" parent="." index="40" instance=ExtResource( 12 )]
+
+position = Vector2( 744, 2558 )
+TreeType = "thin_tree_light"
+
+[node name="tree11" parent="." index="41" instance=ExtResource( 12 )]
+
+position = Vector2( 792, 2606 )
+TreeType = "fat_tree_light"
+
+[node name="tree12" parent="." index="42" instance=ExtResource( 12 )]
+
+position = Vector2( 808, 2590 )
+TreeType = "fat_tree_light"
+
+[node name="tree13" parent="." index="43" instance=ExtResource( 12 )]
+
+position = Vector2( 824, 2606 )
+TreeType = "fat_tree_brown"
+
+[node name="tree14" parent="." index="44" instance=ExtResource( 12 )]
+
+position = Vector2( 1000, 2606 )
+TreeType = "tree_light"
+
+[node name="tree15" parent="." index="45" instance=ExtResource( 12 )]
+
+position = Vector2( 1000, 2430 )
+TreeType = "fat_tree_dark"
+
+[node name="tree16" parent="." index="46" instance=ExtResource( 12 )]
+
+position = Vector2( 984, 2414 )
+TreeType = "fat_tree_light"
+
+[node name="tree17" parent="." index="47" instance=ExtResource( 12 )]
+
+position = Vector2( 1016, 2414 )
+TreeType = "fat_tree_light"
+
+[node name="tree18" parent="." index="48" instance=ExtResource( 12 )]
+
+position = Vector2( 1000, 2382 )
+TreeType = "fat_tree_light"
+
+[node name="tree19" parent="." index="49" instance=ExtResource( 12 )]
+
+position = Vector2( 968, 2382 )
+TreeType = "fat_tree_light"
+
+[node name="tree20" parent="." index="50" instance=ExtResource( 12 )]
+
+position = Vector2( 856, 2382 )
+TreeType = "fat_tree_light"
+
+[node name="bus_stop" parent="." index="51" instance=ExtResource( 13 )]
+
+position = Vector2( 1728, 2176 )
+
+[node name="bus_stop2" parent="." index="52" instance=ExtResource( 13 )]
+
+position = Vector2( 1824, 2176 )
+
+[node name="bus_stop3" parent="." index="53" instance=ExtResource( 13 )]
+
+position = Vector2( 1920, 2176 )
+
+[connection signal="any_activity_entered" from="bigger-map/activities" to="." method="_on_any_activity_entered"]
+
+[connection signal="moved_one_grid_space" from="player" to="." method="_on_player_moved_one_grid_space"]
+
+

@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/background-tile.tsx-24dfb6e4eb795dd52fdfbf404b173acc.res"
+
+[deps]
+
+source_file="res://assets/tilesets/background-tile.tsx"
+source_md5="4a1ec298564beacc79b7f871ab3b94d2"
+
+dest_files=[ "res://.import/background-tile.tsx-24dfb6e4eb795dd52fdfbf404b173acc.res" ]
+dest_md5="5457b81394d7958b3cc01775d1beb2ef"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""

@@ -1,0 +1,23 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/lamp.tmx-65ef8eb2de48492b32ca387f2636ca87.scn"
+
+[deps]
+
+source_file="res://assets/tilesets/lamp.tmx"
+source_md5="860f49369a3f5c2bd93f1f9027b979b0"
+
+dest_files=[ "res://.import/lamp.tmx-65ef8eb2de48492b32ca387f2636ca87.scn" ]
+dest_md5="e91fd6b6b7d3c4c342413eb26edfb6ed"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+uv_clip=true
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""
