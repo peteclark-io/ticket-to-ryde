@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="left-up" width="1" height="1" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" name="Roguelike" tilewidth="16" tileheight="16" spacing="1" tilecount="1767" columns="57">
+  <image source="../../../assets/kenney/pack1/Art/Roguelike pack (1700 assets)/Spritesheet/roguelikeSheet_transparent.png" width="968" height="526"/>
+ </tileset>
+ <tileset firstgid="1768" source="roguelike-characters.tsx"/>
+ <layer name="Body" width="1" height="1">
+  <data encoding="csv">
+1769
+</data>
+ </layer>
+ <layer name="Trousers" width="1" height="1">
+  <data encoding="csv">
+1771
+</data>
+ </layer>
+ <layer name="Top" width="1" height="1">
+  <data encoding="csv">
+1774
+</data>
+ </layer>
+ <layer name="Beard" width="1" height="1">
+  <data encoding="csv">
+2010
+</data>
+ </layer>
+</map>

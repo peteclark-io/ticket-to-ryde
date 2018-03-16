@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/roguelike-characters.tsx-0330237227163441254509afd855d801.res"
+
+[deps]
+
+source_file="res://assets/tilesets/roguelike-characters.tsx"
+source_md5="3b200977f03dbbd80109f431ac797f07"
+
+dest_files=[ "res://.import/roguelike-characters.tsx-0330237227163441254509afd855d801.res" ]
+dest_md5="dfed6e4b5c952cc78ceafbea693056c3"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""

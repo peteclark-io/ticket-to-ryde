@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="left-down" width="1" height="2" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" source="Roguelike Modern City.tsx"/>
+ <tileset firstgid="1037" source="roguelikeIndoor_transparent.tsx"/>
+ <tileset firstgid="1505" source="general-roguelike.tsx"/>
+ <layer name="Tile Layer 1" width="1" height="2">
+  <data encoding="csv">
+2090,
+2147
+</data>
+ </layer>
+</map>

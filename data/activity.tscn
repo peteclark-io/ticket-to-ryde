@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://data/activity.gd" type="Script" id=1]
+
+[node name="activity" type="Node"]
+
+script = ExtResource( 1 )
+activity_hours = "Null"
+activity_name = null
+activity_blurb = null
+points = null
+activity_duration = null
+has_food = null
+has_bed = null
+has_drink = null
+
+

@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/general-roguelike.tsx-65ac7c1680ba71e5d524b8ba43f7b28d.res"
+
+[deps]
+
+source_file="res://assets/tilesets/general-roguelike.tsx"
+source_md5="6f3dfea6012b476cb7b342d6db6a8be2"
+
+dest_files=[ "res://.import/general-roguelike.tsx-65ac7c1680ba71e5d524b8ba43f7b28d.res" ]
+dest_md5="950a26b69a4e24fa7a607999842cafee"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""

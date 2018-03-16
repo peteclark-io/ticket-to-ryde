@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://map-decorations/tree.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/thin_tree_light.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/thin_tree_dark.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/thin_tree_brown.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/tree_light.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/tree_dark.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/tree_brown.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/fat_tree_light.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/fat_tree_brown.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/fat_tree_dark.png" type="Texture" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="tree" type="StaticBody2D"]
+
+input_pickable = true
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 0.4
+script = ExtResource( 1 )
+TreeType = null
+
+[node name="thin_tree_light" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+offset = Vector2( 0, -14 )
+_sections_unfolded = [ "Offset" ]
+
+[node name="thin_tree_dark" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 3 )
+offset = Vector2( 0, -14 )
+
+[node name="thin_tree_brown" type="Sprite" parent="." index="2"]
+
+texture = ExtResource( 4 )
+offset = Vector2( 0, -14 )
+
+[node name="tree_light" type="Sprite" parent="." index="3"]
+
+texture = ExtResource( 5 )
+offset = Vector2( 0, -14 )
+
+[node name="tree_dark" type="Sprite" parent="." index="4"]
+
+texture = ExtResource( 6 )
+offset = Vector2( 0, -14 )
+
+[node name="tree_brown" type="Sprite" parent="." index="5"]
+
+texture = ExtResource( 7 )
+offset = Vector2( 0, -14 )
+
+[node name="fat_tree_light" type="Sprite" parent="." index="6"]
+
+texture = ExtResource( 8 )
+offset = Vector2( 0, -14 )
+
+[node name="fat_tree_brown" type="Sprite" parent="." index="7"]
+
+texture = ExtResource( 9 )
+offset = Vector2( 0, -14 )
+
+[node name="fat_tree_dark" type="Sprite" parent="." index="8"]
+
+texture = ExtResource( 10 )
+offset = Vector2( 0, -14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="9"]
+
+position = Vector2( -0.0153109, 0.86176 )
+scale = Vector2( 0.124901, 0.111919 )
+shape = SubResource( 1 )
+
+

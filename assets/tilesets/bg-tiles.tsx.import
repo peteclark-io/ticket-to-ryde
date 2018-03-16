@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/bg-tiles.tsx-29baee504209d20fac147738bc36148b.res"
+
+[deps]
+
+source_file="res://assets/tilesets/bg-tiles.tsx"
+source_md5="31ed31b9db3e80eed94c8dd84a01b8d1"
+
+dest_files=[ "res://.import/bg-tiles.tsx-29baee504209d20fac147738bc36148b.res" ]
+dest_md5="024f690d2eeaa367e4c636137c797043"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""

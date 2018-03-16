@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_tileset_importer"
+type="TileSet"
+path="res://.import/Pathways.tsx-3c34ad4013cf6f9a29542f53fc57937e.res"
+
+[deps]
+
+source_file="res://assets/tilesets/Pathways.tsx"
+source_md5="8ed0b7a5fef64e21a6bbbe29a176409b"
+
+dest_files=[ "res://.import/Pathways.tsx-3c34ad4013cf6f9a29542f53fc57937e.res" ]
+dest_md5="5f86bdef2ecab59656dcf5ddbcbd7466"
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+image_flags=7
+embed_internal_images=false
+save_tiled_properties=false
+post_import_script=""
