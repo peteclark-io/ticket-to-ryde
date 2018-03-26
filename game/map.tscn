@@ -80,6 +80,7 @@ margin_top = 3049.0
 margin_right = 157.0
 margin_bottom = 3131.0
 rect_scale = Vector2( 0.7, 0.7 )
+rect_clip_content = false
 _sections_unfolded = [ "Material", "Rect", "Visibility" ]
 
 [node name="union_hotel" parent="bigger-map/activities" index="1" instance=ExtResource( 4 )]
@@ -107,6 +108,7 @@ margin_top = 2752.0
 margin_right = 697.0
 margin_bottom = 2836.0
 rect_scale = Vector2( 0.7, 0.7 )
+rect_clip_content = false
 _sections_unfolded = [ "Material", "Rect", "Visibility" ]
 
 [node name="shakespeare_hotel" parent="bigger-map/activities" index="2" instance=ExtResource( 4 )]
@@ -132,6 +134,7 @@ margin_top = 2254.0
 margin_right = 1329.0
 margin_bottom = 2338.0
 rect_scale = Vector2( 0.7, 0.7 )
+rect_clip_content = false
 _sections_unfolded = [ "Material", "Rect", "Visibility" ]
 
 [node name="stinking_bishops" parent="bigger-map/activities" index="3" instance=ExtResource( 4 )]
@@ -159,6 +162,7 @@ margin_top = 2529.0
 margin_right = 177.0
 margin_bottom = 2613.0
 rect_scale = Vector2( 0.7, 0.7 )
+rect_clip_content = false
 _sections_unfolded = [ "Material", "Rect", "Visibility" ]
 
 [node name="petersham_bowlo" parent="bigger-map/activities" index="4" instance=ExtResource( 4 )]
@@ -186,6 +190,7 @@ margin_top = 2239.0
 margin_right = 273.0
 margin_bottom = 2323.0
 rect_scale = Vector2( 0.7, 0.7 )
+rect_clip_content = false
 _sections_unfolded = [ "Material", "Rect", "Visibility" ]
 
 [node name="gift_shop" parent="bigger-map/activities" index="5" instance=ExtResource( 4 )]
@@ -213,6 +218,7 @@ margin_top = 2517.0
 margin_right = 1289.0
 margin_bottom = 2601.0
 rect_scale = Vector2( 0.7, 0.7 )
+rect_clip_content = false
 _sections_unfolded = [ "Material", "Rect", "Visibility" ]
 
 [node name="the_bench" parent="bigger-map/activities" index="6" instance=ExtResource( 4 )]
@@ -240,11 +246,12 @@ margin_top = 2380.0
 margin_right = 798.0
 margin_bottom = 2466.0
 rect_scale = Vector2( 0.7, 0.7 )
+rect_clip_content = false
 _sections_unfolded = [ "Material", "Rect", "Visibility" ]
 
 [node name="player" parent="." index="1" instance=ExtResource( 7 )]
 
-position = Vector2( 1732, 2208 )
+position = Vector2( 88.6832, 3182.03 )
 
 [node name="dawn" parent="." index="2" instance=ExtResource( 8 )]
 

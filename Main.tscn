@@ -27,11 +27,11 @@
 
 [connection signal="new_score" from="player_score" to="hud" method="_on_player_new_score"]
 
+[connection signal="player_entered_activity" from="map" to="hud" method="_on_activity"]
+
 [connection signal="player_entered_activity" from="map" to="game_clock" method="_on_map_player_entered_activity"]
 
 [connection signal="player_entered_activity" from="map" to="player_score" method="_on_map_player_entered_activity"]
-
-[connection signal="player_entered_activity" from="map" to="hud" method="_on_activity"]
 
 [connection signal="player_moved_one_space" from="map" to="game_clock" method="_on_player_moved_one_space"]
 
