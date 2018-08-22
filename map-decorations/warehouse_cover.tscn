@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/sprites/warehouse-cover.png" type="Texture" id=1]
+
+[node name="warehouse_cover" type="Sprite"]
+
+texture = ExtResource( 1 )
+offset = Vector2( 0, -85 )
+_sections_unfolded = [ "Offset" ]
+
+

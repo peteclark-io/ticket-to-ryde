@@ -7,10 +7,10 @@ path="res://.import/bigger-map.tmx-b6925abff7055870dfe0e460bbf4f0ba.scn"
 [deps]
 
 source_file="res://assets/tilesets/bigger-map.tmx"
-source_md5="698203272a18d2c57eead8e80611b76c"
+source_md5="996b475bb9bcafd8844cf6cbbc96cc30"
 
 dest_files=[ "res://.import/bigger-map.tmx-b6925abff7055870dfe0e460bbf4f0ba.scn" ]
-dest_md5="a9040615b11b18478571afc8c5282eb7"
+dest_md5="9cd9f5d2f95bd228595330e26bb67ea1"
 
 [params]
 

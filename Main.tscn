@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/game_clock.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/player_score.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/map.tscn" type="PackedScene" id=3]
 [ext_resource path="res://controls/hud.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/game.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node"]
 
@@ -14,6 +15,8 @@
 [node name="map" parent="." index="2" instance=ExtResource( 3 )]
 
 [node name="hud" parent="." index="3" instance=ExtResource( 4 )]
+
+[node name="game" parent="." index="4" instance=ExtResource( 5 )]
 
 [connection signal="dawn" from="game_clock" to="map" method="_dawn"]
 
@@ -27,11 +30,11 @@
 
 [connection signal="new_score" from="player_score" to="hud" method="_on_player_new_score"]
 
-[connection signal="player_entered_activity" from="map" to="hud" method="_on_activity"]
-
 [connection signal="player_entered_activity" from="map" to="game_clock" method="_on_map_player_entered_activity"]
 
 [connection signal="player_entered_activity" from="map" to="player_score" method="_on_map_player_entered_activity"]
+
+[connection signal="player_entered_activity" from="map" to="hud" method="_on_activity"]
 
 [connection signal="player_moved_one_space" from="map" to="game_clock" method="_on_player_moved_one_space"]
 

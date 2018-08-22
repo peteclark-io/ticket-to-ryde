@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://controls/hud.gd" type="Script" id=1]
 [ext_resource path="res://controls/display_player_score.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://controls/display_time.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/Kenney Pixel.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://shaders/fade_to_black.tscn" type="PackedScene" id=6]
+[ext_resource path="res://player/convo.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFontData" id=1]
 
@@ -211,6 +212,10 @@ process_mode = 1
 wait_time = 0.7
 one_shot = true
 autostart = false
+
+[node name="convo" parent="." index="5" instance=ExtResource( 7 )]
+
+visible = false
 
 [connection signal="timeout" from="activity_complete_container/fade_in_timer" to="." method="_on_fade_in_timer_timeout"]
 

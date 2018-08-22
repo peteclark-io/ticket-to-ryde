@@ -3,7 +3,7 @@ extends YSort
 signal player_moved_one_space(player)
 signal player_entered_activity(player, activity)
 
-export (Vector2) var screensize = Vector2(3200, 3200)
+export (Vector2) var screensize = Vector2(3840, 3840)
 
 func _ready():
 	$player.screensize = screensize

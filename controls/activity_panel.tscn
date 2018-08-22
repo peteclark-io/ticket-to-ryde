@@ -129,6 +129,7 @@ patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 script = ExtResource( 2 )
+_sections_unfolded = [ "Anchor", "Axis Stretch", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Patch Margin", "Rect", "Size Flags", "Theme" ]
 activity_name = "Example"
 activity_hours = "All Day"
 activity_duration = 2
@@ -186,7 +187,7 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "Material", "Visibility" ]
+_sections_unfolded = [ "Margin", "Material", "Visibility", "custom_fonts" ]
 
 [node name="activity_hours" type="Label" parent="VBoxContainer" index="1"]
 

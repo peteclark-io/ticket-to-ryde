@@ -7,10 +7,10 @@ path="res://.import/lamp.tmx-65ef8eb2de48492b32ca387f2636ca87.scn"
 [deps]
 
 source_file="res://assets/tilesets/lamp.tmx"
-source_md5="860f49369a3f5c2bd93f1f9027b979b0"
+source_md5="c8d6c9c3f38e5d9adad55b04429e6cff"
 
 dest_files=[ "res://.import/lamp.tmx-65ef8eb2de48492b32ca387f2636ca87.scn" ]
-dest_md5="e91fd6b6b7d3c4c342413eb26edfb6ed"
+dest_md5="9466584a7b8be7cdeb7e86e117a35116"
 
 [params]
 
